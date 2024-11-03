@@ -1,6 +1,9 @@
 package org.example;
 
-import org.example.creational.Factory.Vehicle;
+import org.example.creational.AbstractFactory.AbstractFactory;
+import org.example.creational.AbstractFactory.Engine;
+import org.example.creational.AbstractFactory.FactoryProducer;
+import org.example.creational.AbstractFactory.Vehicle;
 import org.example.creational.Factory.VehicleFactory;
 import org.example.creational.Singleton;
 
@@ -12,7 +15,18 @@ public class Main {
         System.out.println(singleton1==singleton);
 
 //        factory example
-        Vehicle vehicle=VehicleFactory.getVehicle("CAR");
-        vehicle.drive();
+//        Vehicle vehicle=VehicleFactory.getVehicle("CAR");
+//        vehicle.drive();
+
+        //abstract factory example
+
+        AbstractFactory<Vehicle> vehicleAbstractFactory= (AbstractFactory<Vehicle>) FactoryProducer.getFactory("VEHICLE");
+        Vehicle car=vehicleAbstractFactory.create("CAR");
+        car.drive();
+
+        AbstractFactory<Engine> engineAbstractFactory= (AbstractFactory<Engine>) FactoryProducer.getFactory("ENGINE");
+        Engine engine=engineAbstractFactory.create("CARENGINE");
+        engine.start();
+
     }
 }

@@ -1,10 +1,13 @@
 package org.example;
 
+import org.example.Behavioural.State.MusicPlayer;
+import org.example.Behavioural.Observer.WeatherClient;
+import org.example.Behavioural.Observer.WeatherClient2;
+import org.example.Behavioural.Observer.WeatherStation;
 import org.example.creational.AbstractFactory.AbstractFactory;
 import org.example.creational.AbstractFactory.Engine;
 import org.example.creational.AbstractFactory.FactoryProducer;
 import org.example.creational.AbstractFactory.Vehicle;
-import org.example.creational.Factory.VehicleFactory;
 import org.example.creational.Singleton;
 import org.example.structural.Adapter.BankTransfer;
 import org.example.structural.Adapter.PaymentProcessor;
@@ -47,6 +50,23 @@ public class Main {
         PaypalAdapter adapter=new PaypalAdapter(new Paypal());
         processAndPay(bankTransfer);
         processAndPay123(bankTransfer);
+
+        MusicPlayer player=new MusicPlayer();
+        player.pressPlayButton();
+        player.pressPlayButton();
+        player.pressPlayButton();
+
+        // observer pattern
+        WeatherStation weatherStation=new WeatherStation();
+        WeatherClient weatherClient=new WeatherClient();
+        WeatherClient2 weatherClient2=new WeatherClient2();
+
+        weatherStation.registerObserver(weatherClient2);
+        weatherStation.registerObserver(weatherClient);
+
+        for(int i=0;i<10;i++){
+            weatherStation.updateObservers((int) (Math.random() * 10), (int) (Math.random() * 10));
+        }
 
     }
     private static void processAndPay(PaymentProcessor paymentProcessor){

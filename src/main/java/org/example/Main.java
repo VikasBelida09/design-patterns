@@ -6,6 +6,10 @@ import org.example.creational.AbstractFactory.FactoryProducer;
 import org.example.creational.AbstractFactory.Vehicle;
 import org.example.creational.Factory.VehicleFactory;
 import org.example.creational.Singleton;
+import org.example.structural.Adapter.BankTransfer;
+import org.example.structural.Adapter.PaymentProcessor;
+import org.example.structural.Adapter.Paypal;
+import org.example.structural.Adapter.PaypalAdapter;
 import org.example.structural.Coffee;
 import org.example.structural.MilkDecorator;
 import org.example.structural.SimpleCoffe;
@@ -38,5 +42,17 @@ public class Main {
         System.out.println(sugarAndMilk.getDescription());
         System.out.println(sugarAndMilk.getCost());
 
+        //
+        PaymentProcessor bankTransfer=new BankTransfer();
+        PaypalAdapter adapter=new PaypalAdapter(new Paypal());
+        processAndPay(bankTransfer);
+        processAndPay123(bankTransfer);
+
+    }
+    private static void processAndPay(PaymentProcessor paymentProcessor){
+        paymentProcessor.processPayment(123);
+    }
+    private static void processAndPay123(PaymentProcessor pp1){
+        pp1.processPayment(123);
     }
 }

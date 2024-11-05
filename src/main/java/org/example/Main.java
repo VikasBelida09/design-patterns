@@ -4,6 +4,7 @@ import org.example.Behavioural.State.MusicPlayer;
 import org.example.Behavioural.Observer.WeatherClient;
 import org.example.Behavioural.Observer.WeatherClient2;
 import org.example.Behavioural.Observer.WeatherStation;
+import org.example.Behavioural.strategy.ShoppingCart;
 import org.example.creational.AbstractFactory.AbstractFactory;
 import org.example.creational.AbstractFactory.Engine;
 import org.example.creational.AbstractFactory.FactoryProducer;
@@ -17,6 +18,8 @@ import org.example.structural.Coffee;
 import org.example.structural.MilkDecorator;
 import org.example.structural.SimpleCoffe;
 import org.example.structural.SugarDecorator;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -65,9 +68,13 @@ public class Main {
         weatherStation.registerObserver(weatherClient);
 
         for(int i=0;i<10;i++){
-            weatherStation.updateObservers((int) (Math.random() * 10), (int) (Math.random() * 10));
+//            weatherStation.updateObservers((int) (Math.random() * 10), (int) (Math.random() * 10));
         }
 
+        ShoppingCart shoppingCart=new ShoppingCart();
+        shoppingCart.setStrategy(new org.example.Behavioural.strategy.Paypal("vikasbelida09@gmail.com"));
+        shoppingCart.setItems(Arrays.asList("Tea Powder", "Coffee","Whey Protein","Milk"));
+        shoppingCart.pay();
     }
     private static void processAndPay(PaymentProcessor paymentProcessor){
         paymentProcessor.processPayment(123);

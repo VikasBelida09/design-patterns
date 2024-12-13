@@ -18,6 +18,8 @@ import org.example.structural.Coffee;
 import org.example.structural.MilkDecorator;
 import org.example.structural.SimpleCoffe;
 import org.example.structural.SugarDecorator;
+import org.example.test.DPQ1.*;
+import org.example.test.singleton.DatabaseConnection;
 
 import java.util.Arrays;
 
@@ -75,6 +77,20 @@ public class Main {
         shoppingCart.setStrategy(new org.example.Behavioural.strategy.Paypal("vikasbelida09@gmail.com"));
         shoppingCart.setItems(Arrays.asList("Tea Powder", "Coffee","Whey Protein","Milk"));
         shoppingCart.pay();
+
+
+        DatabaseConnection connection=DatabaseConnection.getInstance();
+        DatabaseConnection connection1=DatabaseConnection.getInstance();
+        System.out.println(connection1==connection);
+        PricingStrategy ps=PricingStrategyFactory.getPricingStrategyChain();
+        EcommerceCart cart=new EcommerceCart(ps);
+        cart.addItemToCart(new Item("Iphone 16 pro max",1283.0,1));
+        cart.addItemToCart(new Item("Airpods 2nd gen pro",150.0,2));
+        EcommerceCart cart1=new EcommerceCart(ps);
+        cart1.addItemToCart(new Item("Iphone 16 pro max",1283.0,2));
+        cart1.addItemToCart(new Item("Airpods 2nd gen pro",150.0,2));
+        cart.makePayment(new org.example.test.DPQ1.Paypal("vikasbelida09@gmail.com"), CustomerType.GOLD);
+        cart1.makePayment(new CreditCard("1234512345","123","11/27"), CustomerType.REGULAR);
     }
     private static void processAndPay(PaymentProcessor paymentProcessor){
         paymentProcessor.processPayment(123);

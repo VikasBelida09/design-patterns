@@ -17,9 +17,6 @@ public abstract class ATMState {
     public void cashWithdrawal(ATM atm, Card card, int amount){
         System.out.println("Oops! something went wrong");
     }
-    public void displaybalance(ATM atm, Card card){
-        System.out.println("Oops! somethign went wrong");
-    }
     public void displayBalance(ATM atm, Card card){
         System.out.println("Oops! something went wrong");
     }

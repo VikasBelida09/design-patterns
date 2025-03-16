@@ -7,6 +7,10 @@ import org.example.Behavioural.Observer.WeatherStation;
 import org.example.Behavioural.strategy.ShoppingCart;
 import org.example.Logger.CustomLoggerFactory;
 import org.example.Logger.Logger;
+import org.example.ParkingLot.ParkingLot;
+import org.example.ParkingLot.Ticket;
+import org.example.ParkingLot.VehicleFactory;
+import org.example.ParkingLot.VehicleType;
 import org.example.creational.AbstractFactory.AbstractFactory;
 import org.example.creational.AbstractFactory.Engine;
 import org.example.creational.AbstractFactory.FactoryProducer;
@@ -117,6 +121,17 @@ public class Main {
         writerThread.join();
         readerThread.join();
         logger.log("End of program!");
+
+
+        ParkingLot parkingLot=ParkingLot.getInstance(1,4);
+        org.example.ParkingLot.Vehicle car1=VehicleFactory.createVehicle("AB-1233", VehicleType.CAR);
+        org.example.ParkingLot.Vehicle  bike1=VehicleFactory.createVehicle("CA-12323",VehicleType.BIKE);
+        org.example.ParkingLot.Vehicle truck1=VehicleFactory.createVehicle("TS-1231231",VehicleType.TRUCK);
+        parkingLot.parkVehicle(car1);
+        parkingLot.parkVehicle(bike1);
+        Ticket truckTicket=parkingLot.parkVehicle(truck1);
+
+        System.out.println(parkingLot.removeVehicle(truckTicket));
     }
     private static void processAndPay(PaymentProcessor paymentProcessor){
         paymentProcessor.processPayment(123);
